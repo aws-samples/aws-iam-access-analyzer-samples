@@ -1,0 +1,1 @@
+aws accessanalyzer validate-policy --policy-type IDENTITY_POLICY --policy-document file://identity-policy.json
