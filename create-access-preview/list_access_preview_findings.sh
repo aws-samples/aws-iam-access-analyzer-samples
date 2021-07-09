@@ -1,0 +1,1 @@
+aws accessanalyzer list-access-preview-findings --analyzer-arn $ANALYZER_ARN --access-preview-id $ACCESS_PREVIEW_ID
