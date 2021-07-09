@@ -1,0 +1,11 @@
+{
+    "Statement": [{
+        "Sid": "grant-1234-publish",
+        "Effect": "Allow",
+        "Principal": {
+            "AWS": "111122223333"
+        },
+        "Action": ["sns:Publish"],
+        "Resource": "arn:aws:sns:us-east-2:444455556666:MyTopic"
+    }]
+}

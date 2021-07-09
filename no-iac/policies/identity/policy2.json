@@ -1,0 +1,17 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListObjectsInBucket",
+            "Effect": "Allow",
+            "Action": ["s3:ListBuckets"],
+            "Resource": ["arn:aws:s3:::bucket-name"]
+        },
+        {
+            "Sid": "AllowWriteObject",
+            "Effect": "Allow",
+            "Action": "s3:WriteObject",
+            "Resource": ["arn:aws:s3:::bucket-name/*"]
+        }
+    ]
+}
