@@ -7,12 +7,14 @@ for file in policies/identity/*; do
     echo "Validating policy $file.."
     FINDINGS=$(aws accessanalyzer validate-policy --policy-document file://"$file" --policy-type IDENTITY_POLICY)
 
-    ERRORS=$(echo $FINDINGS | jq '.findings[] | select(.findingType == "ERROR" or .findingType == "SECURITY_WARNING")')
-    WARNINGS=$(echo $FINDINGS | jq '.findings[] | select(.findingType == "WARNING" or .findingType == "SUGGESTION")')
-
     ERRORS=$(echo $FINDINGS | jq '.findings | map(select(.findingType == "ERROR" or .findingType == "SECURITY_WARNING"))')
+    WARNINGS=$(echo $FINDINGS | jq '.findings | map(select(.findingType == "WARNING" or .findingType == "SUGGESTION"))')
+    
     ERRORS_LENGTH=$(echo $ERRORS | jq '. | length')
+    WARNINGS_LENGTH=$(echo $WARNINGS | jq '. | length')
+
     NUMBER_OF_ERRORS=$((NUMBER_OF_ERRORS + ERRORS_LENGTH))
+    NUMBER_OF_WARNINGS=$((NUMBER_OF_WARNINGS + WARNINGS_LENGTH))
 
     echo $ERRORS | jq .
 done
