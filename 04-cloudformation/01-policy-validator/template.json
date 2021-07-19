@@ -1,0 +1,65 @@
+{
+    "Resources": {
+        "MyQueue": {
+            "Type": "AWS::SQS::Queue"
+        },
+        "MyQueuePolicy": {
+            "Type": "AWS::SQS::QueuePolicy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement":[{
+                        "Action": [
+                            "sqs:SendMessage", 
+                            "sqs:ReceiveMessages"
+                        ],
+                        "Effect": "Allow",
+                        "Resource": {
+                            "Fn::GetAtt": ["MyQueue", "Arn"] 
+                        },
+                        "Principal": "*"
+                    }]
+                },
+                "Queues": [
+                    { "Ref": "MyQueue" }
+                ]
+            }
+        },
+        "MyAdministrativeRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "AWS": [
+                                    "111222333444",
+                                    {"Ref": "AWS::AccountId"}
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Policies": [
+                    {
+                        "PolicyName": "root",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": "iam:PassRole",
+                                    "Resource": "*"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,161 @@
+{
+    "BlockingFindings": [
+        {
+            "findingType": "ERROR",
+            "code": "INVALID_ACTION",
+            "message": "The action sqs:ReceiveMessages does not exist.",
+            "resourceName": "MyQueueE6CA6235",
+            "policyName": "QueuePolicy",
+            "details": {
+                "findingDetails": "The action sqs:ReceiveMessages does not exist.",
+                "findingType": "ERROR",
+                "issueCode": "INVALID_ACTION",
+                "learnMoreLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-invalid-action",
+                "locations": [
+                    {
+                        "path": [
+                            {
+                                "value": "Statement"
+                            },
+                            {
+                                "index": 0
+                            },
+                            {
+                                "value": "Action"
+                            },
+                            {
+                                "index": 1
+                            }
+                        ],
+                        "span": {
+                            "end": {
+                                "column": 67,
+                                "line": 1,
+                                "offset": 67
+                            },
+                            "start": {
+                                "column": 46,
+                                "line": 1,
+                                "offset": 46
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "findingType": "SECURITY_WARNING",
+            "code": "PASS_ROLE_WITH_STAR_IN_RESOURCE",
+            "message": "Using the iam:PassRole action with wildcards (*) in the resource can be overly permissive because it allows iam:PassRole permissions on multiple resources. We recommend that you specify resource ARNs or add the iam:PassedToService condition key to your statement.",
+            "resourceName": "MyRoleF48FFE04",
+            "policyName": "MyRoleDefaultPolicyA36BE1DD",
+            "details": {
+                "findingDetails": "Using the iam:PassRole action with wildcards (*) in the resource can be overly permissive because it allows iam:PassRole permissions on multiple resources. We recommend that you specify resource ARNs or add the iam:PassedToService condition key to your statement.",
+                "findingType": "SECURITY_WARNING",
+                "issueCode": "PASS_ROLE_WITH_STAR_IN_RESOURCE",
+                "learnMoreLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-security-warning-pass-role-with-star-in-resource",
+                "locations": [
+                    {
+                        "path": [
+                            {
+                                "value": "Statement"
+                            },
+                            {
+                                "index": 0
+                            },
+                            {
+                                "value": "Action"
+                            }
+                        ],
+                        "span": {
+                            "end": {
+                                "column": 40,
+                                "line": 1,
+                                "offset": 40
+                            },
+                            "start": {
+                                "column": 26,
+                                "line": 1,
+                                "offset": 26
+                            }
+                        }
+                    },
+                    {
+                        "path": [
+                            {
+                                "value": "Statement"
+                            },
+                            {
+                                "index": 0
+                            },
+                            {
+                                "value": "Resource"
+                            }
+                        ],
+                        "span": {
+                            "end": {
+                                "column": 76,
+                                "line": 1,
+                                "offset": 76
+                            },
+                            "start": {
+                                "column": 73,
+                                "line": 1,
+                                "offset": 73
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "findingType": "SECURITY_WARNING",
+            "code": "EXTERNAL_PRINCIPAL",
+            "message": "Trust policy allows access from external principals.",
+            "resourceName": "MyRoleF48FFE04",
+            "policyName": "TrustPolicy",
+            "details": {
+                "action": [
+                    "sts:AssumeRole"
+                ],
+                "changeType": "NEW",
+                "condition": {},
+                "createdAt": "2021-07-19T13:00:25+00:00",
+                "id": "029c08d8-7da5-4640-a595-1752e9b12467",
+                "isPublic": false,
+                "principal": {
+                    "AWS": "111222333444"
+                },
+                "resource": "arn:aws:iam::217833312139:role/MyRoleF48FFE04",
+                "resourceOwnerAccount": "217833312139",
+                "resourceType": "AWS::IAM::Role",
+                "status": "ACTIVE"
+            }
+        },
+        {
+            "findingType": "SECURITY_WARNING",
+            "code": "EXTERNAL_PRINCIPAL",
+            "message": "Resource policy allows access from external principals.",
+            "resourceName": "MyQueueE6CA6235",
+            "policyName": "QueuePolicy",
+            "details": {
+                "action": [
+                    "sqs:SendMessage"
+                ],
+                "changeType": "NEW",
+                "condition": {},
+                "createdAt": "2021-07-19T13:00:28+00:00",
+                "id": "7a71a9dc-1be2-4f58-be2e-d9ac4712966d",
+                "isPublic": true,
+                "principal": {
+                    "AWS": "*"
+                },
+                "resource": "arn:aws:sqs:us-east-1:217833312139:MyQueueE6CA6235",
+                "resourceOwnerAccount": "217833312139",
+                "resourceType": "AWS::SQS::Queue",
+                "status": "ACTIVE"
+            }
+        }
+    ],
+    "NonBlockingFindings": []
+}

@@ -1,0 +1,192 @@
+{
+    "BlockingFindings": [
+        {
+            "findingType": "ERROR",
+            "code": "INVALID_ACTION",
+            "message": "The action sqs:ReceiveMessages does not exist.",
+            "resourceName": "MyQueue",
+            "policyName": "QueuePolicy",
+            "details": {
+                "findingDetails": "The action sqs:ReceiveMessages does not exist.",
+                "findingType": "ERROR",
+                "issueCode": "INVALID_ACTION",
+                "learnMoreLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-invalid-action",
+                "locations": [
+                    {
+                        "path": [
+                            {
+                                "value": "Statement"
+                            },
+                            {
+                                "index": 0
+                            },
+                            {
+                                "value": "Action"
+                            },
+                            {
+                                "index": 1
+                            }
+                        ],
+                        "span": {
+                            "end": {
+                                "column": 92,
+                                "line": 1,
+                                "offset": 92
+                            },
+                            "start": {
+                                "column": 71,
+                                "line": 1,
+                                "offset": 71
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "findingType": "SECURITY_WARNING",
+            "code": "PASS_ROLE_WITH_STAR_IN_RESOURCE",
+            "message": "Using the iam:PassRole action with wildcards (*) in the resource can be overly permissive because it allows iam:PassRole permissions on multiple resources. We recommend that you specify resource ARNs or add the iam:PassedToService condition key to your statement.",
+            "resourceName": "MyAdministrativeRole",
+            "policyName": "root",
+            "details": {
+                "findingDetails": "Using the iam:PassRole action with wildcards (*) in the resource can be overly permissive because it allows iam:PassRole permissions on multiple resources. We recommend that you specify resource ARNs or add the iam:PassedToService condition key to your statement.",
+                "findingType": "SECURITY_WARNING",
+                "issueCode": "PASS_ROLE_WITH_STAR_IN_RESOURCE",
+                "learnMoreLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-security-warning-pass-role-with-star-in-resource",
+                "locations": [
+                    {
+                        "path": [
+                            {
+                                "value": "Statement"
+                            },
+                            {
+                                "index": 0
+                            },
+                            {
+                                "value": "Action"
+                            }
+                        ],
+                        "span": {
+                            "end": {
+                                "column": 84,
+                                "line": 1,
+                                "offset": 84
+                            },
+                            "start": {
+                                "column": 70,
+                                "line": 1,
+                                "offset": 70
+                            }
+                        }
+                    },
+                    {
+                        "path": [
+                            {
+                                "value": "Statement"
+                            },
+                            {
+                                "index": 0
+                            },
+                            {
+                                "value": "Resource"
+                            }
+                        ],
+                        "span": {
+                            "end": {
+                                "column": 101,
+                                "line": 1,
+                                "offset": 101
+                            },
+                            "start": {
+                                "column": 98,
+                                "line": 1,
+                                "offset": 98
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "findingType": "SECURITY_WARNING",
+            "code": "EXTERNAL_PRINCIPAL",
+            "message": "Trust policy allows access from external principals.",
+            "resourceName": "MyAdministrativeRole",
+            "policyName": "TrustPolicy",
+            "details": {
+                "action": [
+                    "sts:AssumeRole"
+                ],
+                "changeType": "NEW",
+                "condition": {},
+                "createdAt": "2021-07-19T12:39:56+00:00",
+                "id": "d5272bae-17d7-4e15-b73b-d46a6a7fa42d",
+                "isPublic": false,
+                "principal": {
+                    "AWS": "111222333444"
+                },
+                "resource": "arn:aws:iam::217833312139:role/MyAdministrativeRole",
+                "resourceOwnerAccount": "217833312139",
+                "resourceType": "AWS::IAM::Role",
+                "status": "ACTIVE"
+            }
+        },
+        {
+            "findingType": "SECURITY_WARNING",
+            "code": "EXTERNAL_PRINCIPAL",
+            "message": "Resource policy allows access from external principals.",
+            "resourceName": "MyQueue",
+            "policyName": "QueuePolicy",
+            "details": {
+                "action": [
+                    "sqs:SendMessage"
+                ],
+                "changeType": "NEW",
+                "condition": {},
+                "createdAt": "2021-07-19T12:39:58+00:00",
+                "id": "8b308e61-d605-413a-afb7-2d985037e6a3",
+                "isPublic": true,
+                "principal": {
+                    "AWS": "*"
+                },
+                "resource": "arn:aws:sqs:us-east-1:217833312139:MyQueue",
+                "resourceOwnerAccount": "217833312139",
+                "resourceType": "AWS::SQS::Queue",
+                "status": "ACTIVE"
+            }
+        }
+    ],
+    "NonBlockingFindings": [
+        {
+            "findingType": "WARNING",
+            "code": "MISSING_VERSION",
+            "message": "We recommend that you specify the Version element to help you with debugging permission issues.",
+            "resourceName": "MyAdministrativeRole",
+            "policyName": "TrustPolicy",
+            "details": {
+                "findingDetails": "We recommend that you specify the Version element to help you with debugging permission issues.",
+                "findingType": "WARNING",
+                "issueCode": "MISSING_VERSION",
+                "learnMoreLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-general-warning-missing-version",
+                "locations": [
+                    {
+                        "path": [],
+                        "span": {
+                            "end": {
+                                "column": 122,
+                                "line": 1,
+                                "offset": 122
+                            },
+                            "start": {
+                                "column": 0,
+                                "line": 1,
+                                "offset": 0
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
