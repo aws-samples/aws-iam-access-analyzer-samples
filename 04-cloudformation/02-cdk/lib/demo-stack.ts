@@ -8,18 +8,6 @@ export class DemoStack extends cdk.Stack {
     super(scope, id, props);
 
     const myQueue = new sqs.Queue(this, 'MyQueue');
-
-    const policyDocument = {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Sid": "FirstStatement",
-          "Effect": "Allow",
-          "Action": ["iam:ChangePassword"],
-          "Resource": "*"
-        }
-      ]
-    };
     
     myQueue.addToResourcePolicy(
       new iam.PolicyStatement({

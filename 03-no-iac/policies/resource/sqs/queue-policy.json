@@ -1,0 +1,15 @@
+{
+    "Version": "2012-10-17",
+    "Id": "MyQueuePolicy",
+    "Statement": [{
+       "Sid":"AllowSendMessage",
+       "Effect": "Allow",
+       "Principal": {
+          "AWS": [ 
+             "111122223333"
+          ]
+       },
+       "Action": "sqs:SendMessage",
+       "Resource": "arn:aws:sqs:us-east-1:217833312139:MyQueue"
+    }]  
+ }

@@ -2,3 +2,4 @@ venv
 .idea
 .terraform
 .vscode/settings.json
+__pycache__
