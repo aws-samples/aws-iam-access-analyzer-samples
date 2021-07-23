@@ -1,0 +1,14 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DenyInternetGateways",
+            "Principal": "*",
+            "Effect": "Deny",
+            "Action": [
+                "iam:CreateRole"
+            ],
+            "NotResouce": "arn:aws:iam::123456789123:role/developers/*"
+        }
+    ]
+}

@@ -1,4 +1,6 @@
 from collections import defaultdict
+
+from access_preview import SQSAccessPreview
 from colors import colors
 
 import boto3
@@ -10,29 +12,43 @@ import sys
 aa_client = boto3.client('accessanalyzer')
 
 
-def validate_policy(full_policy_filename):
+def validate_policy(full_policy_filename, policy_document):
     parent_directory = os.path.basename(os.path.dirname(full_policy_filename))
     if parent_directory.lower() == 'identity':
         policy_type = 'IDENTITY_POLICY'
     else:
         policy_type = 'RESOURCE_POLICY'
 
-    with open(full_policy_filename, 'r') as policy_document:
-        policy_document_json = json.load(policy_document)
-        validate_policy_response = aa_client.validate_policy(
-            policyDocument=json.dumps(policy_document_json),
-            policyType=policy_type
-        )
+    validate_policy_response = aa_client.validate_policy(
+        policyDocument=json.dumps(policy_document),
+        policyType=policy_type
+    )
 
-        findings = []
-        for finding in validate_policy_response['findings']:
-            findings.append(finding)
+    findings = []
+    for finding in validate_policy_response['findings']:
+        findings.append(finding)
 
-        return findings
+    return findings
 
 
-def get_access_preview_findings(root, policy_filename):
-    pass
+def get_access_preview_findings(full_policy_filename, policy_document):
+    parent_directory = os.path.basename(os.path.dirname(full_policy_filename)).lower()
+    if parent_directory == 'trust':
+        return []
+    elif parent_directory == 'sns':
+        return []
+    elif parent_directory == 'sqs':
+        access_preview = SQSAccessPreview()
+    elif parent_directory == 's3':
+        return []
+    elif parent_directory == 'kms':
+        return []
+    else:
+        return []
+
+    access_preview.create(policy_document)
+    access_preview.get()
+    return access_preview.list_findings()
 
 
 def validate():
@@ -47,8 +63,13 @@ def validate():
     for root, dirs, files in os.walk(policies_directory, topdown=True):
         for file in files:
             full_policy_filename = os.path.join(root, file)
+            with open(full_policy_filename, 'r') as file:
+                policy_document = json.load(file)
 
-            findings = validate_policy(full_policy_filename)
+                findings = []
+                findings.extend(validate_policy(file.name, policy_document))
+                findings.extend(get_access_preview_findings(file.name, policy_document))
+
             results[full_policy_filename] = findings
 
     should_exit_with_non_zero_code = False

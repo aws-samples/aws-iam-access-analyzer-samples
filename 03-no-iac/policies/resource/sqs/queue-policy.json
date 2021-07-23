@@ -10,6 +10,6 @@
           ]
        },
        "Action": "sqs:SendMessage",
-       "Resource": "arn:aws:sqs:us-east-1:217833312139:MyQueue"
+       "Resource": "*"
     }]  
  }
