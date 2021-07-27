@@ -1,6 +1,5 @@
 {
     "Statement": [{
-        "Sid": "grant-1234-publish",
         "Effect": "Allow",
         "Principal": {
             "AWS": "111122223333"

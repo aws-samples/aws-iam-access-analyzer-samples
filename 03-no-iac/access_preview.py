@@ -132,3 +132,20 @@ class S3BucketPolicyAccessPreview(AccessPreview):
 				}
 			}
 		}
+
+
+class KmsKeyPolicyAccessPreview(AccessPreview):
+	def _build_configuration(self, policy):
+		resource = self._get_resource_from_policy(policy)
+		if resource == '*':
+			resource = f'arn:{partition}:kms:{region}:{account_id}:key/ArbitraryId'
+
+		return {
+			resource: {
+				'kmsKey': {
+					'keyPolicies': {
+						'default': json.dumps(policy)
+					}
+				}
+			}
+		}

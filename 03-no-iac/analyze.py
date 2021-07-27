@@ -1,6 +1,7 @@
 from collections import defaultdict
 
-from access_preview import SQSAccessPreview, RoleTrustPolicyAccessPreview, S3BucketPolicyAccessPreview
+from access_preview import SQSAccessPreview, RoleTrustPolicyAccessPreview, S3BucketPolicyAccessPreview, \
+    KmsKeyPolicyAccessPreview
 from colors import colors
 
 import boto3
@@ -40,7 +41,7 @@ def get_access_preview_findings(full_policy_filename, policy_document):
     elif parent_directory == 's3':
         access_preview = S3BucketPolicyAccessPreview()
     elif parent_directory == 'kms':
-        return []
+        access_preview = KmsKeyPolicyAccessPreview()
     else:
         return []
 
