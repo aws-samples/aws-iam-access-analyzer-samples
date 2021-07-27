@@ -73,21 +73,44 @@ class AccessPreview(ABC):
 
 		return findings
 
-
-class SQSAccessPreview(AccessPreview):
 	@staticmethod
-	def _build_configuration(policy):
-		resource = policy['Statement'][0]['Resource']
+	def _get_resource_from_policy(policy):
+		resource = policy['Statement'][0].get('Resource')
+		if resource is None:
+			return None
+
 		if isinstance(resource, list):
 			resource = resource[0]
 
+		return resource
+
+
+class SQSAccessPreview(AccessPreview):
+	def _build_configuration(self, policy):
+		resource = self._get_resource_from_policy(policy)
 		if resource == "*":
-			resource = f'arn:{partition}:sqs:{region}:{account_id}:MyQueue'
+			resource = f'arn:{partition}:sqs:{region}:{account_id}:ArbitraryQueueName'
 
 		return {
 			resource: {
 				'sqsQueue': {
 					'queuePolicy': json.dumps(policy)
+				}
+			}
+		}
+
+
+class RoleTrustPolicyAccessPreview(AccessPreview):
+	@staticmethod
+	def _build_configuration(policy):
+		# IAM trust policies cannot have a Resource field in their policy statements
+		# the name chosen for the role does not matter
+		resource = f'arn:{partition}:iam::{account_id}:role/ArbitraryName'
+
+		return {
+			resource: {
+				'iamRole': {
+					'trustPolicy': json.dumps(policy)
 				}
 			}
 		}

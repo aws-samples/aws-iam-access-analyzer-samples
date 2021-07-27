@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from access_preview import SQSAccessPreview
+from access_preview import SQSAccessPreview, RoleTrustPolicyAccessPreview
 from colors import colors
 
 import boto3
@@ -33,8 +33,8 @@ def validate_policy(full_policy_filename, policy_document):
 
 def get_access_preview_findings(full_policy_filename, policy_document):
     parent_directory = os.path.basename(os.path.dirname(full_policy_filename)).lower()
-    if parent_directory == 'trust':
-        return []
+    if parent_directory == 'role':
+        access_preview = RoleTrustPolicyAccessPreview()
     elif parent_directory == 'sns':
         return []
     elif parent_directory == 'sqs':
@@ -49,6 +49,11 @@ def get_access_preview_findings(full_policy_filename, policy_document):
     access_preview.create(policy_document)
     access_preview.get()
     return access_preview.list_findings()
+
+
+def get_count(results, finding_type):
+    return len([finding for filename, findings in results.items()
+                for finding in findings if finding['findingType'] == finding_type])
 
 
 def validate():
@@ -87,6 +92,11 @@ def validate():
                 print()
 
         print(colors.RESET)
+
+    print(f'{colors.OKBLUE}ERRORS: {get_count(results, "ERROR")}')
+    print(f'{colors.OKBLUE}SECURITY_WARNINGS: {get_count(results, "SECURITY_WARNING")}')
+    print(f'{colors.OKBLUE}WARNINGS: {get_count(results, "WARNING")}')
+    print(f'{colors.OKBLUE}SUGGESTIONS: {get_count(results, "SUGGESTION")}')
 
     if should_exit_with_non_zero_code:
         print(f'{colors.FAIL}FAILED: ERROR or SECURITY_WARNING findings.')
