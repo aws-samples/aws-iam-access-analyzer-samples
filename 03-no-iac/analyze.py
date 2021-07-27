@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from access_preview import SQSAccessPreview, RoleTrustPolicyAccessPreview
+from access_preview import SQSAccessPreview, RoleTrustPolicyAccessPreview, S3BucketPolicyAccessPreview
 from colors import colors
 
 import boto3
@@ -33,14 +33,12 @@ def validate_policy(full_policy_filename, policy_document):
 
 def get_access_preview_findings(full_policy_filename, policy_document):
     parent_directory = os.path.basename(os.path.dirname(full_policy_filename)).lower()
-    if parent_directory == 'role':
+    if parent_directory == 'trust':
         access_preview = RoleTrustPolicyAccessPreview()
-    elif parent_directory == 'sns':
-        return []
     elif parent_directory == 'sqs':
         access_preview = SQSAccessPreview()
     elif parent_directory == 's3':
-        return []
+        access_preview = S3BucketPolicyAccessPreview()
     elif parent_directory == 'kms':
         return []
     else:

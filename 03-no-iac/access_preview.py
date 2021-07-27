@@ -114,3 +114,21 @@ class RoleTrustPolicyAccessPreview(AccessPreview):
 				}
 			}
 		}
+
+
+class S3BucketPolicyAccessPreview(AccessPreview):
+	def _build_configuration(self, policy):
+		resource = self._get_resource_from_policy(policy)
+		if resource == '*':
+			raise Exception('Resource "*" is not valid in an S3 bucket policy.')
+
+		if resource.endswith('/*'):
+			resource = resource[:-2]
+
+		return {
+			resource: {
+				's3Bucket': {
+					'bucketPolicy': json.dumps(policy)
+				}
+			}
+		}
