@@ -2,6 +2,8 @@
 
 Welcome! This repository contains sample code used to demo the AWS IAM Access Analyzer Policy Validation APIs. You can use this code to integrate policy validation logic into your CI/CD pipelines.
 
+> :warning: **NOTE:** This repository contains example code and is intended for educational purposes __only__. This code should __not__ be used in production environments. :warning:
+
 ## About Access Analyzer Policy Validation
 
 You can validate your policies using AWS IAM Access Analyzer policy checks. Access Analyzer validates your policy against IAM policy grammar and best practices. You can view policy validation check findings that include security warnings, errors, general warnings, and suggestions for your policy. These findings provide actionable recommendations that help you author policies that are functional and conform to security best practices. 
