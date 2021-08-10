@@ -20,6 +20,15 @@ You can learn more about this feature here: https://docs.aws.amazon.com/IAM/late
 
 Before walking through any of the below samples, please ensure that you are properly authenticated into the AWS CLI and are using AWS CLI v2.
 
+Using the Access Analyzer APIs:
+1. [(01) Validate Policy API(s)](01-validate-policy/)
+1. [(02) Access Preview API(s)](02-create-access-preview/)
+
+Automating Policy Validation with Access Analyzer:
+1. [(03) Scripted, IAM Policies that haven't been defined using Infrastructure as Code](03-no-iac/)
+1. [(04) IAM Policies Defined using CloudFormation](04-cloudformation/)
+1. [(05) IAM Policies Defined using Terraform](05-terraform/)
+1. [(06) Service Control Policies (SCP)](06-scps/)
 
 
 ### AWS IAM Access Analyzer APIs
