@@ -27,8 +27,7 @@ Using the Access Analyzer APIs:
 Automating Policy Validation with Access Analyzer:
 1. [(03) Scripted, IAM Policies that haven't been defined using Infrastructure as Code](03-no-iac/)
 1. [(04) IAM Policies Defined using CloudFormation](04-cloudformation/)
-1. [(05) IAM Policies Defined using Terraform](05-terraform/)
-1. [(06) Service Control Policies (SCP)](06-scps/)
+1. [(05) Service Control Policies (SCP)](06-scps/)
 
 
 ### AWS IAM Access Analyzer APIs
@@ -46,12 +45,12 @@ Let's get started! Open up the directory with `cd ./01-validate-policy`.
 
 **To Validate an Identity Policy, run:**
 ```
-sh identity-policy.sh
+sh validate-identity-policy.sh
 ```
 
 **To Validate a Service Control Policy, run:**
 ```
-sh scp.sh
+sh validate-scp.sh
 ```
 
 #### [(02) Access Preview API(s)](02-create-access-preview/)
@@ -89,7 +88,7 @@ Customers often look to automate policy validation in their deployment cycle. He
 
 #### [(03) Scripted, IAM Policies that haven't been defined using Infrastructure as Code](03-no-iac/)
 
-In this example, we place all of our policies into a folder called `policies/` and use a Python script to orchestrate the IAM Access Analyzer API calls that will validate and return findings on the policies that we have created.
+In this example, we place all of our policies into a folder called `policies/` and use a Python script to orchestrate the IAM Access Analyzer API calls that will validate and return findings on the policies that we have created.  The script relies on a specific directory structure to classify each policy when running CreateAccessPreview.
 
 Let's get started! Open up the directory with `cd ./03-no-iac`.
 
@@ -105,14 +104,7 @@ In this example, we
 Let's get started! Open up the directory with `cd ./04-cloudformation`.
 
 
-#### [(05) IAM Policies Defined using Terraform](05-terraform/)
-
-In this example, we
-
-Let's get started! Open up the directory with `cd ./05-terraform`.
-
-
-#### [(06) Service Control Policies (SCP)](06-scps/)
+#### [(05) Service Control Policies (SCP)](06-scps/)
 
 In this example, we will demonstrate how to run automated policy validation on our SCPs for an AWS Organization. We only have the option to run the Validate Policy API here. Our policies are stored in a folder named `policies/`
 
