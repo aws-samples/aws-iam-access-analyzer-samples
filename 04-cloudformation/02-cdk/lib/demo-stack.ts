@@ -27,8 +27,8 @@ export class DemoStack extends cdk.Stack {
 
     role.addToPolicy(new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
-      actions: ['iam:PassRole'],
-      resources: ['*']
+      actions: ['s3:ListBuckets'],
+      resources: ['arn:aws:s3:::bucket-name']
     }));
   }
 }

@@ -12,12 +12,6 @@
             "Effect": "Allow",
             "Action": "s3:*Object*",
             "Resource": ["arn:aws:s3:::bucket-name/*"]
-        },
-        {
-            "Sid": "PassRole",
-            "Effect": "Allow",
-            "Action": "iam:PassRole",
-            "Resource": "*"
         }
     ]
 }

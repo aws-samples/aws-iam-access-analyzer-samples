@@ -17,7 +17,11 @@
                         "Resource": {
                             "Fn::GetAtt": ["MyQueue", "Arn"] 
                         },
-                        "Principal": "*"
+                        "Principal": {
+                            "AWS": [ 
+                               "111122223333"
+                            ]
+                         }
                     }]
                 },
                 "Queues": [
@@ -52,8 +56,8 @@
                             "Statement": [
                                 {
                                     "Effect": "Allow",
-                                    "Action": "iam:PassRole",
-                                    "Resource": "*"
+                                    "Action": ["s3:ListBuckets"],
+                                    "Resource": ["arn:aws:s3:::bucket-name"]
                                 }
                             ]
                         }
