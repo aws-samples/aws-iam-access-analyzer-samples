@@ -35,9 +35,7 @@ Before running the samples in this repository, you'll need the following:
 - An AWS Account
 - Access to the AWS IAM Access Analyzer APIs
 - [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) - please make sure that you have authenticated into the AWS CLI
-- Boto3 v1.18.56+ - to update to the latest version of boto3, use `pip install boto3 --upgrade`
 - Python 3.6+
-- npm - to install, run `npm install`
 - typescript - to install, run `npm install typescript`
 - AWS CDK - to upgrade to the latest version of AWS CDK, run `npm install aws-cdk@latest`
 - [jq](https://stedolan.github.io/jq/download/) - a command line json processor tool
@@ -91,7 +89,7 @@ In Line 13 of `queue-policy.json`, replace `<YOUR ACCOUNT ID>` with your AWS Acc
 . ./get-access-preview.sh
 ```
 
-**Once Status = Completed, Get Access Preview Findings, run:**
+**Once the `status` from the previous command shows as `"COMPLETED"`  run the following command to list the Access Preview findings:**
 ```
 . ./list-access-preview-findings.sh
 ```
@@ -119,7 +117,7 @@ After running this command, you will see a list of findings and recommendations 
 
 Let's get started! Open up the directory with `cd ./04-cloudformation`.
 
-Install IAM Policy Validator with the following command:
+Each of the scripts that we will use in this section installs IAM Policy Validator with the following command:
 ```
 pip install cfn-policy-validator
 ```
@@ -135,6 +133,7 @@ From the `01-policy-validator` folder, run the following command to test the IAM
 
 From the `01-policy-validator` folder, open the `findings.json` file to inspect the findings produced.
 
+
 **... with an AWS CDK app**: Next, we'll show you how to use the IAM Policy Validator tool with an **AWS CDK application**. 
 
 Navigate to the `04-cloudformation/02-cdk` folder. In this folder, the `run-policy-validator.sh` script first uses `cdk synth` to generate a CloudFormation template from the CDK code and then runs the same `cfn-policy-validator validate` command to validate the resources defined in the template using Access Analyzer and output any findings to a new `findings.json` file.
@@ -143,6 +142,8 @@ From the `04-cloudformation/02-cdk` folder, run the folling command to test the 
 ```
 . ./run-policy-validator.sh
 ```
+From the `01-policy-validator` folder, open the `findings.json` file to inspect the findings produced.
+
 
 #### [(05) Service Control Policies (SCP)](06-scps/)
 
