@@ -43,7 +43,7 @@ Before running the samples in this repository, you'll need the following:
 
 ### How to Run the Sample Code
 
-1. #### [Validate Policy API(s)](01-validate-policy/)
+#### [Validate Policy API(s)](01-validate-policy/)
 
 The ValidatePolicy API requests the validation of a policy and returns a list of findings. The findings help you identify issues and provide actionable recommendations to resolve the issue and enable you to author functional policies that meet security best practices.
 
@@ -64,7 +64,7 @@ Let's get started! Open up the directory with `cd ./01-validate-policy`.
 . ./validate-scp.sh
 ```
 
-2. #### [Access Preview API(s)](02-create-access-preview/)
+#### [Access Preview API(s)](02-create-access-preview/)
 
 In addition to helping you identify resources that are shared with an external entity, AWS IAM Access Analyzer also enables you to preview Access Analyzer findings before deploying resource permissions so you can validate that your policy changes grant only intended public and cross-account access to your resource. This helps you start with intended external access to your resources.
 
@@ -96,7 +96,7 @@ In Line 13 of `queue-policy.json`, replace `<YOUR ACCOUNT ID>` with your AWS Acc
 ```
 
 
-3. #### [Scripted, IAM Policies that haven't been defined using Infrastructure as Code](03-no-iac/)
+#### [Scripted, IAM Policies that haven't been defined using Infrastructure as Code](03-no-iac/)
 
 In this example, we place all of our policies into a folder called `policies/` and use a Python script to orchestrate the IAM Access Analyzer API calls that will validate and return findings on the policies that we have created.  The script relies on a specific directory structure to classify each policy when running CreateAccessPreview.
 
@@ -109,7 +109,7 @@ python analyze.py
 
 After running this command, you will see a list of findings and recommendations for remediation.
 
-4. #### [IAM Policies Defined using CloudFormation](04-cloudformation/)
+#### [IAM Policies Defined using CloudFormation](04-cloudformation/)
 
 **Using the IAM Policy Validator tool**: In this example, we will demonstrate how to run automated policy validation on IAM policies defined in a CloudFormation template. To do this, we use the [IAM Policy Validator for AWS CloudFormation command line tool](https://github.com/awslabs/aws-cloudformation-iam-policy-validator). You can learn more about this tool and how to use it in the blog post [Validate IAM policies in CloudFormation templates using IAM Access Analyzer](https://aws.amazon.com/blogs/security/validate-iam-policies-in-cloudformation-templates-using-iam-access-analyzer/).
 
@@ -143,7 +143,7 @@ From the `04-cloudformation/02-cdk` folder, run the folling command to test the 
 From the `01-policy-validator` folder, open the `findings.json` file to inspect the findings produced.
 
 
-5. #### [Service Control Policies (SCP)](06-scps/)
+#### [Service Control Policies (SCP)](06-scps/)
 
 In this example, we will demonstrate how to run automated policy validation on our SCPs for an AWS Organization. We only have the option to run the Validate Policy API here. Our policies are stored in a folder named `policies/`
 
