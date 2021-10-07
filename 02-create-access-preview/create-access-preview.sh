@@ -1,6 +1,7 @@
 
 ANALYZER_ARN=$(aws accessanalyzer list-analyzers --query "analyzers[?status=='ACTIVE'].arn | [0]" --output text)
 ACCOUNT_ID=$(aws sts get-caller-identity --output text | cut -f1 -d$'\t')
+echo $ANALYZER_ARN
 
 QUEUE_POLICY=$(cat queue-policy.json | jq -c . | sed "s/<YOUR ACCOUNT ID>/${ACCOUNT_ID}/") 
 
