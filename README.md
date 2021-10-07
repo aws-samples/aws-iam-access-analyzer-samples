@@ -1,8 +1,9 @@
 # AWS IAM Access Analyzer Samples
 
-Welcome! This repository contains sample code used to demo the AWS IAM Access Analyzer APIs and how you can use them to automate your policy validation workflows.
-
 > :warning: **NOTE:** This repository contains example code and is intended for educational purposes __only__. This code should __not__ be used in production environments. :warning:
+
+
+Welcome! This repository contains sample code used to demo the AWS IAM Access Analyzer APIs and how you can use them to automate your policy validation workflows.
 
 ## About Access Analyzer
 
@@ -29,28 +30,39 @@ Automating Policy Validation with Access Analyzer:
 1. [(04) IAM Policies Defined using CloudFormation](04-cloudformation/)
 1. [(05) Service Control Policies (SCP)](06-scps/)
 
+### Prequisites
+Before running the samples in this repository, you'll need the following:
+- An AWS Account
+- Access to the AWS IAM Access Analyzer APIs
+- [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) - please make sure that you have authenticated into the AWS CLI
+- Boto3 v1.18.56+ - to update to the latest version of boto3, use `pip install boto3 --upgrade`
+- Python 3.6+
+- npm - to install, run `npm install`
+- typescript - to install, run `npm install typescript`
+- AWS CDK - to upgrade to the latest version of AWS CDK, run `npm install aws-cdk@latest`
+- [jq](https://stedolan.github.io/jq/download/) - a command line json processor tool
 
-### AWS IAM Access Analyzer APIs
+### Using the AWS IAM Access Analyzer APIs
 
 #### [(01) Validate Policy API(s)](01-validate-policy/)
 
 Requests the validation of a policy and returns a list of findings. The findings help you identify issues and provide actionable recommendations to resolve the issue and enable you to author functional policies that meet security best practices.
 
 **Learn More:**
-AWS API Call: https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ValidatePolicy.html
-AWS CLI Call: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/accessanalyzer/validate-policy.html
+- [AWS API](https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ValidatePolicy.html)
+- [AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/accessanalyzer/validate-policy.html)
 
 Let's get started! Open up the directory with `cd ./01-validate-policy`.
 
 
 **To Validate an Identity Policy, run:**
 ```
-sh validate-identity-policy.sh
+. ./validate-identity-policy.sh
 ```
 
 **To Validate a Service Control Policy, run:**
 ```
-sh validate-scp.sh
+. ./validate-scp.sh
 ```
 
 #### [(02) Access Preview API(s)](02-create-access-preview/)
@@ -60,29 +72,31 @@ In addition to helping you identify resources that are shared with an external e
 You can preview and validate public and cross-account access to your Amazon S3 buckets in the Amazon S3 console. You can also use Access Analyzer APIs to preview public and cross-account access for your Amazon S3 buckets, AWS KMS keys, IAM roles, Amazon SQS queues and Secrets Manager secrets by providing proposed permissions for your resource.
 
 Gathering these findings consists of 3 API calls:
-1. Create Access Preview (AWS API Call)[https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_CreateAccessPreview.html] (AWS CLI Call)[https://awscli.amazonaws.com/v2/documentation/api/latest/reference/accessanalyzer/create-access-preview.html] - launches creation of an access preview
-1. Get Access Preview (AWS API Call)[https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_GetAccessPreview.html] (AWS CLI Call)[https://awscli.amazonaws.com/v2/documentation/api/latest/reference/accessanalyzer/get-access-preview.html] - gets status of access preview
-1. List Access Preview Findings (AWS API Call)[https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ListAccessPreviewFindings.html] (AWS CLI Call)[https://awscli.amazonaws.com/v2/documentation/api/latest/reference/accessanalyzer/list-access-preview-findings.html] - retrieves a list of findings from the access preview
+1. Create Access Preview ([AWS API](https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_CreateAccessPreview.html)) ([AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/accessanalyzer/create-access-preview.html)) - launches creation of an access preview
+1. Get Access Preview ([AWS API](https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_GetAccessPreview.html)) ([AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/accessanalyzer/get-access-preview.html)) - gets status of access preview
+1. List Access Preview Findings ([AWS API](https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ListAccessPreviewFindings.html)) ([AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/accessanalyzer/list-access-preview-findings.html)) - retrieves a list of findings from the access preview
 
 Let's get started! Open up the directory with `cd ./02-create-access-preview`.
+
+In Line 13 of `queue-policy.json`, replace `<YOUR ACCOUNT ID>` with your AWS Account ID.
 
 
 **To Create an Access Preview, run:**
 ```
-sh create-access-preview.sh
+. ./create-access-preview.sh
 ```
 
 **To Get an Access Preview Status, run:**
 ```
-sh get-access-preview.sh
+. ./get-access-preview.sh
 ```
 
 **Once Status = Completed, Get Access Preview Findings, run:**
 ```
-sh list_access_preview_findings.sh
+. ./list-access-preview-findings.sh
 ```
 
-### Automate Policy Validation
+### Automating Policy Validation with Access Analyzer
 
 Customers often look to automate policy validation in their deployment cycle. Here, we'll take a look at some ways to do that.
 
@@ -97,22 +111,48 @@ Let's get started! Open up the directory with `cd ./03-no-iac`.
 python analyze.py
 ```
 
+After running this command, you will see a list of findings and recommendations for remediation.
+
 #### [(04) IAM Policies Defined using CloudFormation](04-cloudformation/)
 
-In this example, we
+**Using the IAM Policy Validator tool**: In this example, we will demonstrate how to run automated policy validation on IAM policies defined in a CloudFormation template. To do this, we use the [IAM Policy Validator for AWS CloudFormation command line tool](https://github.com/awslabs/aws-cloudformation-iam-policy-validator). You can learn more about this tool and how to use it in the blog post [Validate IAM policies in CloudFormation templates using IAM Access Analyzer](https://aws.amazon.com/blogs/security/validate-iam-policies-in-cloudformation-templates-using-iam-access-analyzer/).
 
 Let's get started! Open up the directory with `cd ./04-cloudformation`.
 
+Install IAM Policy Validator with the following command:
+```
+pip install cfn-policy-validator
+```
+
+**... with AWS CloudFormation templates**: First, we'll show you how to use the IAM Policy Validator tool with a basic **AWS CloudFormation template**. 
+
+Navigate to the `04-cloudformation/01-policy-validator` folder. In this folder, we've defined a CloudFormation template in `template.json`. The `run-policy-validator.sh` script first runs the `cfn-policy-validator validate` command on the template to validate the resources defined in the template using Access Analyzer and then outputs any findings to a new `findings.json` file. 
+
+From the `01-policy-validator` folder, run the following command to test the IAM Policy Validator tool on a CloudFormation template:
+```
+. ./run-policy-validator.sh
+```
+
+From the `01-policy-validator` folder, open the `findings.json` file to inspect the findings produced.
+
+**... with an AWS CDK app**: Next, we'll show you how to use the IAM Policy Validator tool with an **AWS CDK application**. 
+
+Navigate to the `04-cloudformation/02-cdk` folder. In this folder, the `run-policy-validator.sh` script first uses `cdk synth` to generate a CloudFormation template from the CDK code and then runs the same `cfn-policy-validator validate` command to validate the resources defined in the template using Access Analyzer and output any findings to a new `findings.json` file.
+
+From the `04-cloudformation/02-cdk` folder, run the folling command to test the IAM Policy Validator tool on an AWS CDK application:
+```
+. ./run-policy-validator.sh
+```
 
 #### [(05) Service Control Policies (SCP)](06-scps/)
 
 In this example, we will demonstrate how to run automated policy validation on our SCPs for an AWS Organization. We only have the option to run the Validate Policy API here. Our policies are stored in a folder named `policies/`
 
-Let's get started! Open up the directory with `cd ./06-scps`.
+Let's get started! Open up the directory with `cd ./05-scps`.
 
 **To validate our SCPs, run:**
 ```
-sh validate.scp.sh
+. ./validate.scp.sh
 ```
 
 

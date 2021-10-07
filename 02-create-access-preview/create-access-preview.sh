@@ -1,7 +1,7 @@
 
 ANALYZER_ARN=$(aws accessanalyzer list-analyzers --query "analyzers[?status=='ACTIVE'].arn | [0]" --output text)
 ACCOUNT_ID=$(aws sts get-caller-identity --output text | cut -f1 -d$'\t')
-echo $ANALYZER_ARN
+echo "Access Analyzer ARN: $ANALYZER_ARN"
 
 QUEUE_POLICY=$(cat queue-policy.json | jq -c . | sed "s/<YOUR ACCOUNT ID>/${ACCOUNT_ID}/") 
 
@@ -10,4 +10,4 @@ CONFIGURATIONS=$(jq -n -c --arg account_id "$ACCOUNT_ID" --arg queue_policy "$QU
 echo $CONFIGURATIONS | jq .
 
 ACCESS_PREVIEW_ID=$(aws accessanalyzer create-access-preview --configurations $CONFIGURATIONS --analyzer-arn $ANALYZER_ARN --query id --output text)
-echo $ACCESS_PREVIEW_ID
+echo "Access Preview Created: $ACCESS_PREVIEW_ID"

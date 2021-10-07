@@ -10,6 +10,6 @@
           ]
        },
        "Action": "sqs:SendMessage",
-       "Resource": "arn:aws:sqs:us-east-1:458727251397:MyQueue"
+       "Resource": "arn:aws:sqs:us-east-1:<YOUR ACCOUNT ID>:MyQueue"
     }]  
 }
