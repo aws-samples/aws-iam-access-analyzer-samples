@@ -1,0 +1,58 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ses.amazonaws.com"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::bucket-name/*",
+      "Condition": {
+        "StringLike": {
+          "aws:Referer": "111122223333"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::bucket-name/*"
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::111122223333:saml-provider/idp_SSO_27fdff54821a3a61_DO_NOT_DELETE"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::bucket-name/*"
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "111122223333"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::bucket-name",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceVpc": "vpc-1122334455667788900"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::bucket-name",
+      "Condition": {
+        "StringEquals": {
+          "aws:sourceVpc": "tr*"
+        }
+      }
+    }
+  ]
+}
