@@ -18,7 +18,7 @@ topics=$(aws sns list-topics --query "Topics[*].TopicArn" --output text --region
     do
         policy=$(aws sns get-topic-attributes --topic-arn $topicArn --query Attributes.Policy --output text --region $region)
         echo "Checking topic ARN $topicArn in region $region..."
-        output=$(aws accessanalyzer validate-policy --policy-type RESOURCE_POLICY --policy-document $policy --no-cli-pager --query "findings[*].[findingDetails,findingType,issueCode,learnMoreLink]" --output text)
+        output=$(aws accessanalyzer validate-policy --policy-type RESOURCE_POLICY --policy-document $policy --no-cli-pager --output json )
         echo "$output"
         if [[ -z $output ]]
         then

@@ -22,7 +22,7 @@ restapis=$(aws apigateway get-rest-apis --query "items[*].id" --output text --re
         if [[ $policy != "None" ]] #As policy on restapi is optional
         then
             policyjson=$(echo $policy | sed 's/\\//g') #remove slashes from API gateway policies so they're json
-            output=$(aws accessanalyzer validate-policy --policy-type RESOURCE_POLICY --policy-document $policyjson --no-cli-pager --query "findings[*].[findingDetails,findingType,issueCode,learnMoreLink]" --output text)
+            output=$(aws accessanalyzer validate-policy --policy-type RESOURCE_POLICY --policy-document $policyjson --no-cli-pager --output json)
         else
             echo "No Resource Policy On Restapi $restapi"
         fi

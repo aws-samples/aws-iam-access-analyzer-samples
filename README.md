@@ -40,6 +40,7 @@ Before running the samples in this repository, you'll need the following:
 - [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) - please make sure that you have authenticated into the AWS CLI
 - Python 3.6+
 - [jq](https://stedolan.github.io/jq/download/) - a command line json processor tool
+- zsh for api gateway/sns topics scripts
 
 ### How to Run the Sample Code
 
