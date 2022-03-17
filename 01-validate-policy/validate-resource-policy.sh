@@ -1,0 +1,1 @@
+aws accessanalyzer validate-policy --policy-type RESOURCE_POLICY --policy-document file://resource-policy.json

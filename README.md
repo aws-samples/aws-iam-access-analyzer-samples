@@ -45,7 +45,9 @@ Before running the samples in this repository, you'll need the following:
 
 #### [Validate Policy API(s)](01-validate-policy/)
 
-The ValidatePolicy API requests the validation of a policy and returns a list of findings. The findings help you identify issues and provide actionable recommendations to resolve the issue and enable you to author functional policies that meet security best practices.
+The ValidatePolicy API requests the validation of a policy and returns a list of findings. The findings help you identify issues and provide actionable recommendations to resolve the issue and enable you to author functional policies that meet security best practices. The ValidatePolicy API supports identity policies, service control policies, and resource policies.
+
+The ValidatePolicy API supports resource policies from resources that are not currently supported by IAM Access Analyzer, such as SNS and API Gateway.
 
 **Learn More:**
 - [AWS API](https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ValidatePolicy.html)
@@ -62,6 +64,21 @@ Let's get started! Open up the directory with `cd ./01-validate-policy`.
 **To Validate a Service Control Policy, run:**
 ```
 . ./validate-scp.sh
+```
+
+**To Validate a Resource Policy, run:**
+```
+. ./validate-resource-policy.sh
+```
+
+**To Validate all SNS topic's policies in all regions in an AWS account, run:**
+```
+/bin/bash ./validate-all-sns-topics.sh
+```
+
+**To Validate all API Gateways policies in all regions in an AWS account, run:**
+```
+/bin/bash ./validate-all-api-gateways.sh
 ```
 
 #### [Access Preview API(s)](02-create-access-preview/)
