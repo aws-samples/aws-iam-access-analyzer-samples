@@ -74,12 +74,12 @@ Let's get started! Open up the directory with `cd ./01-validate-policy`.
 
 **To Validate all SNS topic's policies in all regions in an AWS account, run:**
 ```
-/bin/bash ./validate-all-sns-topics.sh
+. ./validate-all-sns-topics.sh
 ```
 
 **To Validate all API Gateways policies in all regions in an AWS account, run:**
 ```
-/bin/bash ./validate-all-api-gateways.sh
+. ./validate-all-api-gateways.sh
 ```
 
 #### [Access Preview API(s)](02-create-access-preview/)
