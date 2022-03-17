@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/bin/zsh
 
 #declare regions
 echo "Getting active regions for this AWS account"
 regions=$(aws ec2 describe-regions --query "Regions[*].RegionName" --output text)
+
+setopt SH_WORD_SPLIT #required for bash-like forloops in zsh
 
 echo "Beginning check of Rest API Gateways"
 echo ""
