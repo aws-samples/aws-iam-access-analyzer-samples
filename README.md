@@ -172,6 +172,8 @@ To runs navigate to the directory with the scripts `cd ./06-service-specific` an
 
 These scripts may generate a lot of output, so the examples below use shell output redirection to write it to a file.
 
+If you have a large amount of resources in your AWS account, ensure that you do not have pagination explicitly disabled in your AWS cli configuration or environmental variables.
+
 
 **To Validate all SNS topic's policies in all regions in an AWS account, run:**
 ```
