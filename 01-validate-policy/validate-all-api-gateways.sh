@@ -10,14 +10,15 @@ echo "Beginning check of Rest API Gateways"
 echo ""
 echo ""
 
+export AWS_MAX_ATTEMPTS=6 #allow for aggressive 
 
 #iterate over regions, get a list of REST (v1) apis, and check.
 for region in $regions;
 do
-restapis=$(aws apigateway get-rest-apis --query "items[*].id" --output text --region $region)
+restapis=$(aws apigateway get-rest-apis --query "items[*].id" --output text --no-cli-pager --region $region)
     for restapi in $restapis;
     do
-        policy=$(aws apigateway get-rest-api --rest-api-id $restapi --query "policy" --output text --region $region)
+        policy=$(aws apigateway get-rest-api --rest-api-id $restapi --query "policy" --output text --no-cli-pager --region $region)
         echo "Checking Rest API ID $restapi in region $region..."
         if [[ $policy != "None" ]] #As policy on restapi is optional
         then
