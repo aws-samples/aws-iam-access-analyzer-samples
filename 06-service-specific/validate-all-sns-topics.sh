@@ -22,7 +22,7 @@ topics=$(aws sns list-topics --query "Topics[*].TopicArn" --output text --region
         echo "Checking topic ARN $topicArn in region $region..."
         output=$(aws accessanalyzer validate-policy --policy-type RESOURCE_POLICY --policy-document $policy --no-cli-pager --output json --no-cli-pager )
         echo "$output"
-        if [[ -z $output ]]
+        if [[ -z $(echo $output | jq ".[][]") ]]
         then
             echo "No Findings From Access Analyzer for $topicArn"
         fi

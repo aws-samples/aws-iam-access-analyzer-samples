@@ -28,7 +28,7 @@ restapis=$(aws apigateway get-rest-apis --query "items[*].id" --output text --no
             echo "No Resource Policy On Restapi $restapi"
         fi
 
-        if [[ -z $output ]]
+        if [[ -z $output ]] || [[ -z $(echo $output | jq ".[][]") ]]
         then
             echo "No Findings From Access Analyzer for $restapi"
         else
