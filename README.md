@@ -72,16 +72,6 @@ Let's get started! Open up the directory with `cd ./01-validate-policy`.
 . ./validate-resource-policy.sh
 ```
 
-**To Validate all SNS topic's policies in all regions in an AWS account, run:**
-```
-. ./validate-all-sns-topics.sh
-```
-
-**To Validate all API Gateways policies in all regions in an AWS account, run:**
-```
-. ./validate-all-api-gateways.sh
-```
-
 #### [Access Preview API(s)](02-create-access-preview/)
 
 In addition to helping you identify resources that are shared with an external entity, AWS IAM Access Analyzer also enables you to preview Access Analyzer findings before deploying resource permissions so you can validate that your policy changes grant only intended public and cross-account access to your resource. This helps you start with intended external access to your resources.
@@ -161,7 +151,7 @@ From the `04-cloudformation/02-cdk` folder, run the folling command to test the 
 From the `01-policy-validator` folder, open the `findings.json` file to inspect the findings produced.
 
 
-#### [Service Control Policies (SCP)](06-scps/)
+#### [Service Control Policies (SCP)](05-scps/)
 
 In this example, we will demonstrate how to run automated policy validation on our SCPs for an AWS Organization. We only have the option to run the Validate Policy API here. Our policies are stored in a folder named `policies/`
 
@@ -172,6 +162,26 @@ Let's get started! Open up the directory with `cd ./05-scps`.
 . ./validate.scp.sh
 ```
 
+#### [Service Specific Bulk Scripts](06-service-specific/)
+
+In this example we will demonstrate how you can use the AWS cli and Access Analyzer to perform a bulk scan of resource policies in an AWS account. This script has logic to enumerate all active AWS regions in an account, get a list of AWS API Gateways and SNS topics respectively, and check them against Access Analyzers Validate Policy API for any findings.
+
+SNS and API Gateway are given as examples as Access Analyzer does not currently support scanning these resources proactively, but their resource policies can be sent to access analyzer for policy validation.
+
+To runs navigate to the directory with the scripts `cd ./06-service-specific` and run them.
+
+These scripts may generate a lot of output, so the examples below use shell output redirect to write it to a file.
+
+
+**To Validate all SNS topic's policies in all regions in an AWS account, run:**
+```
+. ./validate-all-sns-topics.sh >> sns_topic_findings.txt
+```
+
+**To Validate all API Gateways policies in all regions in an AWS account, run:**
+```
+. ./validate-all-api-gateways.sh >> api_gateway_findings.txt
+```
 
 ## Security
 
