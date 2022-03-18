@@ -10,7 +10,7 @@ echo "Beginning check of SNS topics"
 echo ""
 echo ""
 
-export AWS_MAX_ATTEMPTS=6 #allow for aggressive retries/max attempts
+export AWS_MAX_ATTEMPTS=8 #allow for aggressive retries/max attempts
 
 #iterate over regions, get a list of topics, and evaluate send them to access analyzer
 for region in $regions;

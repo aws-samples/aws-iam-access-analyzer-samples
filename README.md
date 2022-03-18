@@ -170,7 +170,7 @@ SNS and API Gateway are given as examples as Access Analyzer does not currently 
 
 To runs navigate to the directory with the scripts `cd ./06-service-specific` and run them.
 
-These scripts may generate a lot of output, so the examples below use shell output redirect to write it to a file.
+These scripts may generate a lot of output, so the examples below use shell output redirection to write it to a file.
 
 
 **To Validate all SNS topic's policies in all regions in an AWS account, run:**

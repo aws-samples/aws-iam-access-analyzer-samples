@@ -10,7 +10,7 @@ echo "Beginning check of Rest API Gateways"
 echo ""
 echo ""
 
-export AWS_MAX_ATTEMPTS=6 #allow for aggressive retries/max attempts
+export AWS_MAX_ATTEMPTS=8 #allow for aggressive retries/max attempts
 
 #iterate over regions, get a list of REST (v1) apis, and check.
 for region in $regions;
